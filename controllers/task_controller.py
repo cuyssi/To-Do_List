@@ -17,7 +17,7 @@ def create_task(title, description, state="pendiente"):
 def get_all_tasks():
     db = SessionLocal()
     try:
-        return db.query(Task).all()
+        return db.query(Task).order_by(Task.id).all()
     except Exception as e:
         print(f"\033[91m🚩 Atención!\033[0m Error al obtener las tareas: {e}")
         return []

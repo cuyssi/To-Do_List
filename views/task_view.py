@@ -11,13 +11,13 @@ from models.task_model import Task
 
 def show_menu():
     return """
-    --- \033[35mMENÚ TO-DO LIST\033[0m ---
-\033[94m1. Crear tarea
-2. Ver todas las tareas
-3. Ver tarea por ID
-4. Actualizar tarea
-5. Eliminar tarea
-6. Salir\033[0m
+---- \033[42mMENÚ TO-DO LIST\033[0m ----\n
+ \033[95m1. Crear tarea
+ 2. Ver todas las tareas
+ 3. Ver tarea por ID
+ 4. Actualizar tarea
+ 5. Eliminar tarea
+ 6. Salir\033[0m\n 
 \033[32mElige una opción:\033[0m """
 
 # Validamos que el ID ingresado sea un número entero válido
@@ -28,9 +28,9 @@ def input_task_id():
     Retorna el ID como entero o None si la entrada no es válida.
     """
     try:
-        return int(input("\033[92mIntroduce el ID de la tarea:\033[0m "))
+        return int(input("\033[33mIntroduce el ID de la tarea:\033[0m "))
     except ValueError:
-        print("\033[91m🚩 Atención!\033[0mDebes introducir un número válido.")
+        print("\n\033[47m\033[1m\033[91m  🚩 Atención! Debes introducir un número válido.")
         return None
 
 # Verificamos que una tarea exista antes de modificarla o eliminarla
@@ -41,7 +41,7 @@ def validate_task_exists(task_id):
     """
     task = get_one(task_id)
     if not task:
-        print("\033[91m🚩 Atención!\033[0mNo existe una tarea con ese ID.")
+        print("\n\033[47m\033[1m\033[91m  🚩 Atención! No existe una tarea con ese ID.  \033[0m")
         return None
     return task
 
@@ -60,18 +60,18 @@ def get_task_for_id():
 
 
 def create_view():
-    title = input("\033[35mNombre de la tarea que quieres agregar?:\033[0m ")
+    title = input("\033[33mNombre de la tarea que quieres agregar?:\033[0m ")
     description = input("\033[35mDescribela:\033[0m ")
     if not title:
-        print("\033[91m🚩 Atención!\033[0mEl nombre no puede estar vacío.")
+        print("\n\033[47m\033[1m\033[91m  🚩 Atención! El nombre no puede estar vacío.")
         return
     create_task(title, description)
-    print("\033[45m✅ Tarea creada correctamente!\033[0m")
+    print("\n\033[45m✅ Tarea creada correctamente!\033[0m")
 
 def show_tasks():
     tasks = get_all_tasks()
     if not tasks:
-        print("\033[91m🚩 Atención!\033[0mNo hay tareas registradas.")
+        print("\n\033[47m\033[1m\033[91m  🚩 Atención! No hay tareas registradas.")
     for task in tasks:
         print(task)
 
@@ -82,10 +82,10 @@ def show_one_task():
 
 def menu_update():
     return """
----\033[35mQué quieres modificar?\033[0m---
-\033[94m1.Modificar titulo de tarea
-2.Modificar descripcion de tarea
-3.Modificar estado de la tarea\033[0m
+----\033[92mQué quieres modificar?\033[0m----\n
+\033[95m 1. Modificar titulo de tarea
+ 2. Modificar descripcion de tarea
+ 3. Modificar estado de la tarea\033[0m\n
 \033[32mElige una opción:\033[0m """
 
 def options_update():
@@ -95,7 +95,7 @@ def options_update():
         return
     option = input(menu_update())
     if option not in ["1", "2", "3"]:
-        print("\033[91m🚩 Atención!\033[0mOpcion invalida.")
+        print("\n\033[47m\033[1m\033[91m  🚩 Atención! Opcion invalida.")
         return
     campos = {
         "1": ("titulo", "title"),
@@ -103,19 +103,19 @@ def options_update():
         "3": ("estado", "state")
     }
     etiqueta, campo = campos[option]
-    nuevo_valor = input(f"\033[92mNuevo {etiqueta}:\033[0m ").strip()
+    nuevo_valor = input(f"\033[33mNuevo {etiqueta}:\033[0m ").strip()
     if not nuevo_valor:
-        print(f"\033[91m🚩 Atención!\033[0mEl {etiqueta} no puede estar vacío.")
+        print(f"\n\033[47m\033[1m\033[91m  🚩 Atención! El {etiqueta} no puede estar vacío.")
         return
 
     update_task(task_id, **{campo: nuevo_valor})
-    print("\033[45m✅ Tarea actualizada correctamente.\033[0m")
+    print("\n\033[45m✅ Tarea actualizada correctamente.\033[0m")
     return
 def delete_view():
     task_id, task = get_task_for_id()
     if task:
         delete(task_id)
-        print("\033[45m✅ Tarea eliminada correctamente.\033[0m")
+        print("\n\033[45m✅ Tarea eliminada correctamente.\033[0m")
 
 
 def menu():
@@ -132,7 +132,7 @@ def menu():
         elif option == "5":
             delete_view()
         elif option == "6":
-            print("\033[35mHasta luego!\033[0m")
+            print("\n\033[1m\033[35m 👋 Hasta luego!\n  \033[0m")
             break
 
 menu()
