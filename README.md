@@ -1,4 +1,5 @@
-📝 Proyecto TODO List - Python Vanilla + PostgreSQL
+# 📝Proyecto TODO List - Python Vanilla + PostgreSQL
+
 Este proyecto es un ejemplo funcional de una aplicación de consola que permite gestionar tareas (CRUD) utilizando Python, arquitectura MVC, SQLAlchemy y PostgreSQL, sin frameworks.
 
 📦 Requisitos previos
@@ -17,7 +18,7 @@ git clone <url-del-repo>
 cd todo_list
 ```
 
-2. Crea y activa entorno virtual
+2.Crea y activa entorno virtual
 
 ```bash
 python -m venv venv
@@ -25,7 +26,7 @@ source venv/bin/activate  # En Linux/MacOS
 venv\Scripts\activate    # En Windows
 ```
 
-3. Instala las dependencias
+3.Instala las dependencias
 
 ```bash
 pip install -r requirements.txt
@@ -52,17 +53,16 @@ Hemos preparado un script para que no tengas que crear la base de datos manualme
 cp .env.example .env
 ```
 
-2. Rellena tus credenciales de PostgreSQL en el archivo `.env`:
+2.Rellena tus credenciales de PostgreSQL en el archivo `.env`:
 
-```
-DB_USER=tu_usuario
+```DB_USER=tu_usuario
 DB_PASSWORD=tu_contraseña
 DB_HOST=localhost
 DB_PORT=5432
 DB_NAME=todo_db
 ```
 
-3. Ejecuta los scripts de inicialización:
+3.Ejecuta los scripts de inicialización:
 
 ```bash
 python setup_db.py   # Crea la base de datos si no existe
@@ -80,12 +80,11 @@ La URL de conexión es generada automáticamente desde las variables del archivo
 alembic init alembic
 ```
 
-2. Configura Alembic:
+2.Configura Alembic:
 
 * En `alembic.ini`:
 
-```
-sqlalchemy.url = postgresql+pg8000://postgres:1234@localhost/todo_db
+```sqlalchemy.url = postgresql+pg8000://postgres:1234@localhost/todo_db
 ```
 
 * En `alembic/env.py`:
@@ -96,7 +95,7 @@ from models.task_model import Task
 target_metadata = Base.metadata
 ```
 
-3. Crea y aplica la migración:
+3.Crea y aplica la migración:
 
 ```bash
 alembic revision --autogenerate -m "crear tabla tasks"
@@ -112,8 +111,7 @@ python views/task_view.py
 
 Y verás:
 
-```
---- MENÚ TO-DO LIST ---
+```--- MENÚ TO-DO LIST ---
 1. Crear tarea
 2. Ver todas las tareas
 3. Ver tarea por ID
@@ -155,4 +153,3 @@ todo\_list/
 * Los scripts `setup_db.py` y `seed.py` automatizan la preparación de tu entorno.
 
 ¡Disfruta programando! 🐍✨
-
