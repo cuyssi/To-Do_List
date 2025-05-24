@@ -3,6 +3,8 @@ __pycache__/
 *.py[cod]
 *.pyo
 *.pyd
+pycache/
+*.pyc
 
 # Alembic cache
 alembic/versions/*.pyc
