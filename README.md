@@ -34,15 +34,7 @@ pip install -r requirements.txt
 
 🛠️ Base de datos
 
-1. Crea la base de datos en PostgreSQL
-   Usa este comando (fuera del entorno virtual):
-
-```bash
-psql -U postgres -c "CREATE DATABASE todo_db;"
-```
-
-Asegúrate de tener acceso a psql y que tu contraseña sea 1234.
-Puedes modificarla en `.env` si estás usando variables de entorno.
+Asegúrate de tener acceso a psql.
 
 🔐 Configuración con script automático
 Hemos preparado un script para que no tengas que crear la base de datos manualmente:
@@ -53,10 +45,10 @@ Hemos preparado un script para que no tengas que crear la base de datos manualme
 cp .env.example .env
 ```
 
-2.Rellena tus credenciales de PostgreSQL en el archivo `.env`:
+2.Rellena tus credenciales de PostgreSQL en el archivo `.env` que creara al tirar ese comando:
 
-```DB_USER=tu_usuario
-DB_PASSWORD=tu_contraseña
+```DB_USER=tu_usuario (suele ser postgres)
+DB_PASSWORD=tu_contraseña (la contraseña de postgres)
 DB_HOST=localhost
 DB_PORT=5432
 DB_NAME=todo_db
@@ -72,7 +64,7 @@ python seed.py       # Rellena la tabla de tareas con datos de prueba
 🔗 Conexión a PostgreSQL
 La URL de conexión es generada automáticamente desde las variables del archivo `.env`.
 
-🔄 Migraciones (opcional si usas los scripts anteriores)
+🔄 Migraciones (opcional si no usas los scripts anteriores)
 
 1. Inicializa Alembic (si no está hecho)
 
@@ -106,7 +98,7 @@ alembic upgrade head
 Lanza el menú desde la raíz del proyecto:
 
 ```bash
-python views/task_view.py
+python main.py
 ```
 
 Y verás:
@@ -133,18 +125,32 @@ pytest
 ```
 
 🧠 Estructura del proyecto
-todo\_list/
+To-Do_List/
+├── controllers/             # Lógica de control (create, read, update, delete)
+│   ├── init.py
+│   └── task_controller.py
 │
-├── alembic/              # Archivos de migración
-├── controllers/          # Lógica de negocio (CRUD)
-├── database/             # Conexión a la DB
-├── models/               # Definición de modelos SQLAlchemy
-├── views/                # Interfaz por consola
-├── test/                 # Pruebas con pytest
+├── database/                # Configuración de la base de datos
+│   ├── init.py
+│   └── db.py
 │
-├── alembic.ini
-├── requirements.txt
-├── README.md
+├── models/                  # Definición de modelos (clases de datos)
+│   ├── init.py
+│   └── task_model.py
+│
+├── test/                    # Pruebas unitarias (con pytest)
+│   └── test_tasks.py
+│
+├── views/                   # Interfaz por consola (menú, inputs)
+│   ├── init.py
+│   └── task_view.py
+│
+├── .env                     # Variables de entorno (NO se sube al repo)
+├── .env.example             # Plantilla para crear el .env
+├── .gitignore               # Archivos/carpetas que Git debe ignorar
+├── main.py                  # Punto de entrada del programa
+├── requirements.txt         # Dependencias del proyecto
+└── README.md
 
 🧹 Notas finales
 
