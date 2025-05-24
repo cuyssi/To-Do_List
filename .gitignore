@@ -9,7 +9,7 @@ alembic/versions/*.pyc
 
 # Virtual environment
 venv/
-.env/
+.env
 
 # VS Code
 .vscode/
