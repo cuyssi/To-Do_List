@@ -139,4 +139,4 @@ def menu():
             print("\n\033[1m\033[35m 👋 Hasta luego!\n  \033[0m")
             break
 
-menu()
+# menu()
